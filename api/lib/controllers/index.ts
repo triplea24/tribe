@@ -4,6 +4,16 @@ import { Request, Response } from "express";
 
 const Content = mongoose.model("Contact", ContentSchema);
 
+interface ContentType {
+  type: string;
+  title?: string;
+  body: string;
+}
+
+const isValid = (content: ContentType) =>
+  content.type &&
+  (content.type === "article" ? content.body && content.title : content.body);
+
 export class Controller {
   public getCounter: number;
   public postCounter: number;
@@ -12,7 +22,10 @@ export class Controller {
     this.postCounter = 0;
   }
   public addNewContent = (req: Request, res: Response) => {
-    // TODO: Validation error with 400 for title and type
+    if (!isValid(req.body)) {
+      res.statusMessage = "Post/Article is not valid!";
+      return res.send(400).end();
+    }
     this.postCounter++;
     let delayTime = 1;
     let delay = false;
