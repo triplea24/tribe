@@ -19,23 +19,27 @@ class ContentList extends React.Component<Props> {
     return (
       <List className={classes.root}>
         {contents &&
-          Object.keys(contents).map(key => {
-            const object = contents[key];
-            const { _id, type, body, title } = object;
-            return (
-              <React.Fragment key={_id}>
-                <Content
-                  id={_id}
-                  type={type}
-                  title={title}
-                  body={body}
-                  avatar={"https://material-ui.com/static/images/avatar/1.jpg"}
-                  avatarAlt={"Soheil Alavi"}
-                />
-                <Divider />
-              </React.Fragment>
-            );
-          })}
+          Object.keys(contents)
+            .reverse()
+            .map(key => {
+              const object = contents[key];
+              const { _id, type, body, title } = object;
+              return (
+                <React.Fragment key={_id}>
+                  <Content
+                    id={_id}
+                    type={type}
+                    title={title}
+                    body={body}
+                    avatar={
+                      "https://material-ui.com/static/images/avatar/1.jpg"
+                    }
+                    avatarAlt={"Soheil Alavi"}
+                  />
+                  <Divider />
+                </React.Fragment>
+              );
+            })}
       </List>
     );
   }

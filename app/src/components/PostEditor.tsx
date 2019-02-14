@@ -44,7 +44,6 @@ class PostEditor extends React.Component<Props, State> {
       });
     }
     this.props.addContent({
-      id: Math.floor(Math.random() * Math.floor(12000)),
       body: this.props.body,
       type: "post"
     });

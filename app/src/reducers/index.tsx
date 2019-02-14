@@ -1,4 +1,4 @@
-import { omit, merge } from "ramda";
+import { omit, merge, assoc } from "ramda";
 
 import {
   ADD_CONTENT,
@@ -21,7 +21,7 @@ export default (state: any = initialState, action: any) => {
     case ADD_CONTENT:
       return {
         ...state,
-        contents: { ...state.contents, [action.payload.id]: action.payload }
+        contents: assoc(action.payload._id, action.payload, state.contents)
       };
     case CHANGE_EDITOR_MODE:
       return { ...state, editorMode: action.payload };

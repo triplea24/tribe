@@ -12,8 +12,14 @@ export const LOAD_CONTENTS = "LOAD_CONTENTS";
 
 export const addContent = (content: any) => (dispatch: any) => {
   // TODO: Request to server
-  dispatch({ type: ADD_CONTENT, payload: content });
-  dispatch({ type: RESET_EDITOR });
+  axios
+    .post(`${SERVER_BASE_URL}/api/v1/posts`, content)
+    .then(({ status, data }) => {
+      if (status === 200) {
+        dispatch({ type: ADD_CONTENT, payload: data });
+        dispatch({ type: RESET_EDITOR });
+      }
+    });
 };
 export const changeEditorMode = (mode: string) => (dispatch: any) => {
   dispatch({ type: CHANGE_EDITOR_MODE, payload: mode });

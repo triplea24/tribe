@@ -80,7 +80,6 @@ class ArticleEditor extends React.Component<Props, State> {
       });
     }
     this.props.addContent({
-      id: Math.floor(Math.random() * Math.floor(12000)),
       body,
       title,
       type: "article"
