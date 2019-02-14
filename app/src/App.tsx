@@ -4,9 +4,11 @@ import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import { withStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 import reducers from "./reducers";
-import ArticleEditor from "./components/ArticleEditor";
+import Editor from "./components/Editor";
+import EditorSwitchTab from "./components/EditorSwitchTab";
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
@@ -19,7 +21,14 @@ class App extends Component<Props> {
     return (
       <Provider store={store}>
         <div className={classes.root}>
-          <ArticleEditor />
+          <Grid container spacing={24}>
+            <Grid item lg={12}>
+              <EditorSwitchTab />
+            </Grid>
+            <Grid item lg={12}>
+              <Editor />
+            </Grid>
+          </Grid>
         </div>
       </Provider>
     );
@@ -29,9 +38,14 @@ class App extends Component<Props> {
 const styles = ({ spacing }: Theme) => ({
   root: {
     paddingTop: spacing.unit * 20,
+    paddingLeft: 123,
+    paddingRight: 163,
     alignItems: "center",
     justifyContent: "center"
   }
 });
 
-export default withStyles(styles)(App);
+const withMaterialUI = withStyles(styles);
+
+// TODO: Should use compose here
+export default withMaterialUI(App);

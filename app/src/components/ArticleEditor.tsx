@@ -42,10 +42,9 @@ class ArticleEditor extends React.Component<Props, State> {
     const { classes } = this.props;
     const bodyPlaceholder = `Text ... (optional)`;
     const titlePlaceholder = "Title";
-
-    const Chips = chips.map(chip => (
-      <Grid item xs={1}>
-        <Chip className={classes.tag} {...chip} />
+    const Chips = chips.map(({ label, key }) => (
+      <Grid item xs={1} key={key}>
+        <Chip className={classes.tag} label={label} />
       </Grid>
     ));
     return (
@@ -89,8 +88,6 @@ class ArticleEditor extends React.Component<Props, State> {
 const styles = ({ spacing }: Theme) => ({
   root: {
     flexGrow: 1,
-    marginLeft: 123,
-    marginRight: 163,
     padding: 18
   },
   body: {},

@@ -74,7 +74,7 @@ class PostEditor extends React.Component<Props> {
             </Button>
           </Grid>
           <Grid item lg={6} />
-          <Grid item lg={1} justify={"flex-end"}>
+          <Grid item lg={1}>
             <Button className={classes.button}>Post</Button>
           </Grid>
         </Grid>
@@ -86,8 +86,6 @@ class PostEditor extends React.Component<Props> {
 const styles = ({ spacing }: Theme) => ({
   root: {
     flexGrow: 1,
-    marginLeft: 123,
-    marginRight: 163,
     padding: 18
   },
   body: {},
