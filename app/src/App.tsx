@@ -2,37 +2,36 @@ import React, { Component } from "react";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
+import { withStyles } from "@material-ui/core/styles";
+import { Theme } from "@material-ui/core";
 
 import reducers from "./reducers";
-
-import logo from "./logo.svg";
-import "./App.css";
+import PostEditor from "./components/PostEditor";
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
-class App extends Component {
+interface Props {
+  classes?: any;
+}
+class App extends Component<Props> {
   render() {
+    const { classes } = this.props;
     return (
       <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+        <div className={classes.root}>
+          <PostEditor />
         </div>
       </Provider>
     );
   }
 }
 
-export default App;
+const styles = ({ spacing }: Theme) => ({
+  root: {
+    paddingTop: spacing.unit * 20,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
+
+export default withStyles(styles)(App);
