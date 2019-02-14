@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core";
 
 import reducers from "./reducers";
-import PostEditor from "./components/PostEditor";
+import ArticleEditor from "./components/ArticleEditor";
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
@@ -19,7 +19,7 @@ class App extends Component<Props> {
     return (
       <Provider store={store}>
         <div className={classes.root}>
-          <PostEditor />
+          <ArticleEditor />
         </div>
       </Provider>
     );
