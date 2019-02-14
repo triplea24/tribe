@@ -11,7 +11,6 @@ export const REMOVE_CONTENT = "REMOVE_CONTENT";
 export const LOAD_CONTENTS = "LOAD_CONTENTS";
 
 export const addContent = (content: any) => (dispatch: any) => {
-  // TODO: Request to server
   axios
     .post(`${SERVER_BASE_URL}/api/v1/posts`, content)
     .then(({ status, data }) => {
@@ -35,7 +34,11 @@ export const resetEditor = () => (dispatch: any) => {
 };
 
 export const removeContent = (id: string) => (dispatch: any) => {
-  dispatch({ type: REMOVE_CONTENT, payload: id });
+  axios.delete(`${SERVER_BASE_URL}/api/v1/posts/${id}`).then(({ status }) => {
+    if (status === 200) {
+      dispatch({ type: REMOVE_CONTENT, payload: id });
+    }
+  });
 };
 
 export const loadContents = () => (dispatch: any) => {
