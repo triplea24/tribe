@@ -14,7 +14,6 @@ interface Props {
 class Editor extends React.Component<Props> {
   render() {
     const { type } = this.props;
-    console.log("editor type is ", type);
     if (type === EditorType.Post) {
       return <PostEditor />;
     }

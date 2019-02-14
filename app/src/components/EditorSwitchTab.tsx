@@ -59,9 +59,12 @@ const withRedux = connect(
 const styles = (theme: Theme) => ({
   activeButton: {
     background: "#f0f3ff",
-    color: "#3e3f42"
+    color: "#3e3f42",
+    borderRadius: 19
   },
-  inactiveButton: {}
+  inactiveButton: {
+    borderRadius: 19
+  }
 });
 
 const withMaterialUI = withStyles(styles);

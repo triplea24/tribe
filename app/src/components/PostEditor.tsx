@@ -10,12 +10,20 @@ import AttachmentIcon from "@material-ui/icons/Attachment";
 import PhotoIcon from "@material-ui/icons/Photo";
 import LibraryBookIcon from "@material-ui/icons/LibraryBooks";
 import MoreIcon from "@material-ui/icons/MoreHoriz";
+import { connect } from "react-redux";
+
+import { changeBodyContent } from "../actions";
 
 interface Props {
   classes?: any;
+  changeBodyContent?: any;
+  body?: string;
 }
 
 class PostEditor extends React.Component<Props> {
+  handleChange = ({ target: { value: body } }: any) => {
+    this.props.changeBodyContent(body);
+  };
   render() {
     const { classes } = this.props;
     const placeholder = `What's on your mind, Soheil?`;
@@ -32,6 +40,8 @@ class PostEditor extends React.Component<Props> {
               fullWidth={true}
               rows={5}
               placeholder={placeholder}
+              value={this.props.body}
+              onChange={this.handleChange}
             />
           </Grid>
           <Grid item lg={"auto"}>
@@ -103,4 +113,12 @@ const styles = ({ spacing }: Theme) => ({
   }
 });
 
-export default withStyles(styles)(PostEditor);
+const mapStateToProps = ({ bodyContent: body }: any) => ({ body });
+
+const withMaterialUI = withStyles(styles);
+const withRedux = connect(
+  mapStateToProps,
+  { changeBodyContent }
+);
+
+export default withRedux(withMaterialUI(PostEditor));

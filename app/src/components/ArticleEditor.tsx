@@ -8,15 +8,21 @@ import Grid from "@material-ui/core/Grid";
 import AttachmentIcon from "@material-ui/icons/Attachment";
 import Chip from "@material-ui/core/Chip";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState } from "draft-js";
-
+import { EditorState, ContentState } from "draft-js";
+import { connect } from "react-redux";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
+import { changeBodyContent, changeTitle } from "../actions";
 
 interface Props {
   classes?: any;
+  changeBodyContent?: any;
+  changeTitle?: any;
+  body: string;
+  title: string;
 }
 interface State {
-  editorState: any;
+  editorState: EditorState;
 }
 
 const chips = [
@@ -29,13 +35,27 @@ class ArticleEditor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      editorState: EditorState.createEmpty()
+      editorState: EditorState.createWithContent(
+        ContentState.createFromText(props.body)
+      )
     };
   }
-  onEditorStateChange = (editorState: any) => {
-    this.setState({
-      editorState
-    });
+  onEditorStateChange = (editorState: EditorState) => {
+    this.setState(
+      {
+        editorState
+      },
+      () => {
+        this.props.changeBodyContent(
+          // TODO: Not plaintext here!
+          editorState.getCurrentContent().getPlainText()
+        );
+      }
+    );
+  };
+
+  handleChangeTitle = ({ target: { value: body } }: any) => {
+    this.props.changeTitle(body);
   };
 
   render() {
@@ -56,6 +76,8 @@ class ArticleEditor extends React.Component<Props, State> {
               multiline={true}
               fullWidth={true}
               placeholder={titlePlaceholder}
+              value={this.props.title}
+              onChange={this.handleChangeTitle}
             />
           </Grid>
           <Grid item lg={12}>
@@ -110,4 +132,15 @@ const styles = ({ spacing }: Theme) => ({
   tag: {}
 });
 
-export default withStyles(styles)(ArticleEditor);
+const mapStateToProps = ({ bodyContent: body = "", title }: any) => ({
+  title,
+  body
+});
+
+const withMaterialUI = withStyles(styles);
+const withRedux = connect(
+  mapStateToProps,
+  { changeBodyContent, changeTitle }
+);
+
+export default withRedux(withMaterialUI(ArticleEditor));
