@@ -1,5 +1,5 @@
 import React from "react";
-import { Theme } from "@material-ui/core";
+import { Theme, Divider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import { connect } from "react-redux";
@@ -21,14 +21,18 @@ class ContentList extends React.Component<Props> {
             const object = contents[key];
             const { id, type, body, title } = object;
             return (
-              <Content
-                key={id + ""}
-                type={type}
-                title={title}
-                body={body}
-                avatar={"https://material-ui.com/static/images/avatar/1.jpg"}
-                avatarAlt={"Soheil Alavi"}
-              />
+              <React.Fragment>
+                <Content
+                  key={id + ""}
+                  id={id}
+                  type={type}
+                  title={title}
+                  body={body}
+                  avatar={"https://material-ui.com/static/images/avatar/1.jpg"}
+                  avatarAlt={"Soheil Alavi"}
+                />
+                <Divider />
+              </React.Fragment>
             );
           })}
       </List>

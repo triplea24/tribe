@@ -1,11 +1,15 @@
 import React from "react";
-import { Theme } from "@material-ui/core";
+import { Theme, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { connect } from "react-redux";
+
+import { removeContent } from "../actions";
 
 const styles = (theme: Theme) => ({
   root: {
@@ -24,9 +28,14 @@ interface Props {
   type: string;
   title?: string;
   body: string;
+  id: string;
+  removeContent: any;
 }
 
 class Content extends React.Component<Props> {
+  handleDelete = () => {
+    this.props.removeContent(this.props.id);
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -46,9 +55,18 @@ class Content extends React.Component<Props> {
             </Typography>
           }
         />
+        <Button onClick={this.handleDelete}>
+          <DeleteIcon />
+        </Button>
       </ListItem>
     );
   }
 }
 
-export default withStyles(styles)(Content);
+const withRedux = connect(
+  null,
+  { removeContent }
+);
+const withMaterialUI = withStyles(styles);
+
+export default withRedux(withMaterialUI(Content));

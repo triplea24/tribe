@@ -3,6 +3,7 @@ export const CHANGE_EDITOR_MODE = "CHANGE_EDITOR_MODE";
 export const CHANGE_BODY_CONTENT = "CHANGE_BODY_CONENT";
 export const CHANGE_TITLE = "CHANGE_TITLE";
 export const RESET_EDITOR = "RESET_EDITOR";
+export const REMOVE_CONTENT = "REMOVE_CONTENT";
 export const addContent = (content: any) => (dispatch: any) => {
   // TODO: Request to server
   dispatch({ type: ADD_CONTENT, payload: content });
@@ -19,4 +20,8 @@ export const changeTitle = (title: string) => (dispatch: any) => {
 };
 export const resetEditor = () => (dispatch: any) => {
   dispatch({ type: RESET_EDITOR });
+};
+
+export const removeContent = (id: string) => (dispatch: any) => {
+  dispatch({ type: REMOVE_CONTENT, payload: id });
 };

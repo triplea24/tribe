@@ -1,9 +1,12 @@
+import { omit } from "ramda";
+
 import {
   ADD_CONTENT,
   CHANGE_EDITOR_MODE,
   CHANGE_BODY_CONTENT,
   CHANGE_TITLE,
-  RESET_EDITOR
+  RESET_EDITOR,
+  REMOVE_CONTENT
 } from "../actions";
 const initialState = {
   contents: {},
@@ -27,6 +30,8 @@ export default (state: any = initialState, action: any) => {
       return { ...state, title: action.payload };
     case RESET_EDITOR:
       return { ...state, bodyContent: "", title: "" };
+    case REMOVE_CONTENT:
+      return { ...state, contents: omit([action.payload], state.contents) };
   }
   return state;
 };
