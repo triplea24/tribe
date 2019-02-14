@@ -1,4 +1,4 @@
-import { omit } from "ramda";
+import { omit, merge } from "ramda";
 
 import {
   ADD_CONTENT,
@@ -6,7 +6,8 @@ import {
   CHANGE_BODY_CONTENT,
   CHANGE_TITLE,
   RESET_EDITOR,
-  REMOVE_CONTENT
+  REMOVE_CONTENT,
+  LOAD_CONTENTS
 } from "../actions";
 const initialState = {
   contents: {},
@@ -32,6 +33,8 @@ export default (state: any = initialState, action: any) => {
       return { ...state, bodyContent: "", title: "" };
     case REMOVE_CONTENT:
       return { ...state, contents: omit([action.payload], state.contents) };
+    case LOAD_CONTENTS:
+      return { ...state, contents: merge(state.contents, action.payload) };
   }
   return state;
 };

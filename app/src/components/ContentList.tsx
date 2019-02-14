@@ -5,10 +5,12 @@ import List from "@material-ui/core/List";
 import { connect } from "react-redux";
 
 import Content from "./Content";
+import { loadContents } from "../actions";
 
 interface Props {
   classes?: any;
   contents: any;
+  loadContents: any;
 }
 
 class ContentList extends React.Component<Props> {
@@ -19,12 +21,11 @@ class ContentList extends React.Component<Props> {
         {contents &&
           Object.keys(contents).map(key => {
             const object = contents[key];
-            const { id, type, body, title } = object;
+            const { _id, type, body, title } = object;
             return (
-              <React.Fragment>
+              <React.Fragment key={_id}>
                 <Content
-                  key={id + ""}
-                  id={id}
+                  id={_id}
                   type={type}
                   title={title}
                   body={body}
@@ -37,6 +38,9 @@ class ContentList extends React.Component<Props> {
           })}
       </List>
     );
+  }
+  componentDidMount() {
+    this.props.loadContents();
   }
 }
 
@@ -53,7 +57,10 @@ const styles = (theme: Theme) => ({
 const mapStateToProps = ({ contents }: any) => ({
   contents
 });
-const withRedux = connect(mapStateToProps);
+const withRedux = connect(
+  mapStateToProps,
+  { loadContents }
+);
 const withMaterialUI = withStyles(styles);
 
 export default withRedux(withMaterialUI(ContentList));

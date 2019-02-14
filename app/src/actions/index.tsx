@@ -1,9 +1,15 @@
+import axios from "axios";
+import { assoc } from "ramda";
+const SERVER_BASE_URL = "http://localhost:3030";
+
 export const ADD_CONTENT = "ADD_CONTENT";
 export const CHANGE_EDITOR_MODE = "CHANGE_EDITOR_MODE";
 export const CHANGE_BODY_CONTENT = "CHANGE_BODY_CONENT";
 export const CHANGE_TITLE = "CHANGE_TITLE";
 export const RESET_EDITOR = "RESET_EDITOR";
 export const REMOVE_CONTENT = "REMOVE_CONTENT";
+export const LOAD_CONTENTS = "LOAD_CONTENTS";
+
 export const addContent = (content: any) => (dispatch: any) => {
   // TODO: Request to server
   dispatch({ type: ADD_CONTENT, payload: content });
@@ -24,4 +30,20 @@ export const resetEditor = () => (dispatch: any) => {
 
 export const removeContent = (id: string) => (dispatch: any) => {
   dispatch({ type: REMOVE_CONTENT, payload: id });
+};
+
+export const loadContents = () => (dispatch: any) => {
+  axios.get(`${SERVER_BASE_URL}/api/v1/posts`).then(({ status, data }) => {
+    if (status === 200) {
+      // const reducer = (acc: any, cur: any) => assoc(cur.id, cur, acc);
+      console.log("data", data);
+      const contents = data.reduce((obj: any, item: any) => {
+        obj[item._id] = item;
+        return obj;
+      }, {});
+      console.log("contents", contents);
+      // const contents = data.reduce(reducer, {});
+      dispatch({ type: LOAD_CONTENTS, payload: contents });
+    }
+  });
 };
