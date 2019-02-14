@@ -1,5 +1,13 @@
 import React from "react";
-import { Theme, Button } from "@material-ui/core";
+import {
+  Theme,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -32,9 +40,23 @@ interface Props {
   removeContent: any;
 }
 
-class Content extends React.Component<Props> {
+interface State {
+  isConfirmationDialogOpen: boolean;
+}
+
+class Content extends React.Component<Props, State> {
+  state = {
+    isConfirmationDialogOpen: false
+  };
   handleDelete = () => {
     this.props.removeContent(this.props.id);
+    this.dismissDialog();
+  };
+  showDialog = () => {
+    this.setState({ isConfirmationDialogOpen: true });
+  };
+  dismissDialog = () => {
+    this.setState({ isConfirmationDialogOpen: false });
   };
   render() {
     const { classes } = this.props;
@@ -55,9 +77,30 @@ class Content extends React.Component<Props> {
             </Typography>
           }
         />
-        <Button onClick={this.handleDelete}>
+        <Button onClick={this.showDialog}>
           <DeleteIcon />
         </Button>
+        <Dialog
+          open={this.state.isConfirmationDialogOpen}
+          onClose={this.dismissDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Delete"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              {`Are you sure you want to delete this ${this.props.type}?`}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.dismissDialog} color="primary">
+              No
+            </Button>
+            <Button onClick={this.handleDelete} color={"secondary"} autoFocus>
+              Yes
+            </Button>
+          </DialogActions>
+        </Dialog>
       </ListItem>
     );
   }
