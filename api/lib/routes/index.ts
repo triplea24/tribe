@@ -11,5 +11,6 @@ export class Routes {
       .route("/api/v1/posts/")
       .post(this.controller.addNewContent)
       .get(this.controller.getAllContents);
+    app.route("/api/v1/posts/:id").delete(this.controller.deleteContent);
   }
 }
