@@ -22,13 +22,21 @@ class Editor extends React.Component<Props> {
 }
 
 interface ReduxState {
-  editorMode?: string;
+  editorMode: string;
+  title?: string;
+  bodyContent: string;
 }
 
 const defaultEditorMode = "article";
 
-const mapStateToProps = ({ editorMode = defaultEditorMode }: ReduxState) => ({
-  type: editorMode === "article" ? EditorType.Article : EditorType.Post
+const mapStateToProps = ({
+  editorMode = defaultEditorMode,
+  title,
+  bodyContent
+}: ReduxState) => ({
+  type: editorMode === "article" ? EditorType.Article : EditorType.Post,
+  title,
+  bodyContent
 });
 const withRedux = connect(mapStateToProps);
 

@@ -1,28 +1,53 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Theme } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
+import {
+  Theme,
+  Paper,
+  TextField,
+  Button,
+  Avatar,
+  Grid,
+  Typography
+} from "@material-ui/core";
 import AttachmentIcon from "@material-ui/icons/Attachment";
 import PhotoIcon from "@material-ui/icons/Photo";
 import LibraryBookIcon from "@material-ui/icons/LibraryBooks";
 import MoreIcon from "@material-ui/icons/MoreHoriz";
 import { connect } from "react-redux";
 
-import { changeBodyContent } from "../actions";
+import { changeBodyContent, addContent } from "../actions";
 
 interface Props {
   classes?: any;
   changeBodyContent?: any;
+  addContent: any;
   body?: string;
 }
 
-class PostEditor extends React.Component<Props> {
+interface State {
+  error: string;
+}
+
+class PostEditor extends React.Component<Props, State> {
+  state = {
+    error: ""
+  };
   handleChange = ({ target: { value: body } }: any) => {
+    if (this.state.error !== "") this.setState({ error: "" });
     this.props.changeBodyContent(body);
+  };
+  handleSubmit = () => {
+    // TODO: Validation first
+    if (this.props.body === undefined || this.props.body === "") {
+      return this.setState({
+        error: `Post must contain some words`
+      });
+    }
+    this.props.addContent({
+      id: Math.floor(Math.random() * Math.floor(12000)),
+      body: this.props.body,
+      type: "post"
+    });
   };
   render() {
     const { classes } = this.props;
@@ -85,7 +110,16 @@ class PostEditor extends React.Component<Props> {
           </Grid>
           <Grid item lg={6} />
           <Grid item lg={1}>
-            <Button className={classes.button}>Post</Button>
+            <Button className={classes.button} onClick={this.handleSubmit}>
+              Post
+            </Button>
+          </Grid>
+          <Grid item lg={12}>
+            {this.state.error && (
+              <Typography className={classes.error}>
+                {this.state.error}
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </Paper>
@@ -110,6 +144,9 @@ const styles = ({ spacing }: Theme) => ({
   },
   avatar: {
     margin: 10
+  },
+  error: {
+    color: "red"
   }
 });
 
@@ -118,7 +155,7 @@ const mapStateToProps = ({ bodyContent: body }: any) => ({ body });
 const withMaterialUI = withStyles(styles);
 const withRedux = connect(
   mapStateToProps,
-  { changeBodyContent }
+  { changeBodyContent, addContent }
 );
 
 export default withRedux(withMaterialUI(PostEditor));

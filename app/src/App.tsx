@@ -9,8 +9,11 @@ import Grid from "@material-ui/core/Grid";
 import reducers from "./reducers";
 import Editor from "./components/Editor";
 import EditorSwitchTab from "./components/EditorSwitchTab";
+import ContentList from "./components/ContentList";
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
+store.subscribe(() => console.log("Change in redux store", store.getState()));
 
 interface Props {
   classes?: any;
@@ -27,6 +30,9 @@ class App extends Component<Props> {
             </Grid>
             <Grid item lg={12}>
               <Editor />
+            </Grid>
+            <Grid item lg={12}>
+              <ContentList />
             </Grid>
           </Grid>
         </div>
