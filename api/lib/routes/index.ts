@@ -1,5 +1,3 @@
-import { Request, Response } from "express";
-
 import { Controller } from "../controllers";
 
 // /api/v1/posts -> POST & GET
