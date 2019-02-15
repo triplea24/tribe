@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditorSwitchTab Article type should be rendered without crash 1`] = `"ArticleEditor"`;
+
+exports[`EditorSwitchTab Article type should be rendered without crash 2`] = `"PostEditor"`;
+
+exports[`EditorSwitchTab Post type should be rendered without crash 1`] = `"PostEditor"`;

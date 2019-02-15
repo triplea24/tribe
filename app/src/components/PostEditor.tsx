@@ -157,4 +157,5 @@ const withRedux = connect(
   { changeBodyContent, addContent }
 );
 
+export const PostEditorComponent = withMaterialUI(PostEditor);
 export default withRedux(withMaterialUI(PostEditor));

@@ -1,33 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Content match the snapshot 1`] = `
+exports[`Content should be rendered without crash 1`] = `
 <li
-  className="MuiListItem-root-126 MuiListItem-default-129 MuiListItem-dense-130 MuiListItem-gutters-134 MuiListItem-alignItemsFlexStart-131"
+  className="MuiListItem-root-3 MuiListItem-default-6 MuiListItem-dense-7 MuiListItem-gutters-11 MuiListItem-alignItemsFlexStart-8"
   disabled={false}
 >
   <div
-    className="MuiAvatar-root-141 MuiListItemAvatar-alignItemsFlexStart-139"
+    className="MuiAvatar-root-18 MuiListItemAvatar-alignItemsFlexStart-16"
   >
     <img
       alt="Soheil Alavi"
-      className="MuiAvatar-img-143"
+      className="MuiAvatar-img-20"
       src="https://material-ui.com/static/images/avatar/1.jpg"
     />
   </div>
   <div
-    className="MuiListItemText-root-144"
+    className="MuiListItemText-root-21"
   >
     <span
-      className="MuiTypography-root-150 MuiTypography-subheading-157 MuiListItemText-primary-147"
+      className="MuiTypography-root-27 MuiTypography-subheading-34 MuiListItemText-primary-24"
     />
     <span
-      className="MuiTypography-root-150 MuiTypography-body1-159 MuiTypography-colorTextPrimary-182 Content-inline-125"
+      className="MuiTypography-root-27 MuiTypography-body1-36 MuiTypography-colorTextPrimary-59 Content-inline-2"
     >
       Something good
     </span>
   </div>
   <button
-    className="MuiButtonBase-root-212 MuiButton-root-186 MuiButton-text-188 MuiButton-flat-191"
+    className="MuiButtonBase-root-89 MuiButton-root-63 MuiButton-text-65 MuiButton-flat-68"
     disabled={false}
     onBlur={[Function]}
     onClick={[Function]}
@@ -45,11 +45,11 @@ exports[`Content match the snapshot 1`] = `
     type="button"
   >
     <span
-      className="MuiButton-label-187"
+      className="MuiButton-label-64"
     >
       <svg
         aria-hidden="true"
-        className="MuiSvgIcon-root-215"
+        className="MuiSvgIcon-root-92"
         focusable="false"
         role="presentation"
         viewBox="0 0 24 24"
@@ -64,7 +64,7 @@ exports[`Content match the snapshot 1`] = `
       </svg>
     </span>
     <span
-      className="MuiTouchRipple-root-240"
+      className="MuiTouchRipple-root-117"
     />
   </button>
 </li>

@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditorSwitchTab should be rendered without crash 1`] = `
+<div
+  className="MuiGrid-container-3 MuiGrid-spacing-xs-8-25"
+>
+  <div
+    className="MuiGrid-item-4 MuiGrid-grid-lg-auto-72"
+    onClick={[Function]}
+  >
+    <button
+      className="MuiButtonBase-root-126 MuiButton-root-100 MuiButton-text-102 MuiButton-flat-105 EditorSwitchTab-activeButton-1"
+      disabled={false}
+      onBlur={[Function]}
+      onContextMenu={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiButton-label-101"
+      >
+        Article
+      </span>
+      <span
+        className="MuiTouchRipple-root-129"
+      />
+    </button>
+  </div>
+  <div
+    className="MuiGrid-item-4 MuiGrid-grid-lg-auto-72"
+    onClick={[Function]}
+  >
+    <button
+      className="MuiButtonBase-root-126 MuiButton-root-100 MuiButton-text-102 MuiButton-flat-105 EditorSwitchTab-inactiveButton-2"
+      disabled={false}
+      onBlur={[Function]}
+      onContextMenu={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiButton-label-101"
+      >
+        Post
+      </span>
+      <span
+        className="MuiTouchRipple-root-129"
+      />
+    </button>
+  </div>
+  <div
+    className="MuiGrid-item-4 MuiGrid-grid-lg-auto-72"
+    onClick={[Function]}
+  >
+    <button
+      className="MuiButtonBase-root-126 MuiButton-root-100 MuiButton-text-102 MuiButton-flat-105 EditorSwitchTab-inactiveButton-2"
+      disabled={false}
+      onBlur={[Function]}
+      onContextMenu={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiButton-label-101"
+      >
+        Question
+      </span>
+      <span
+        className="MuiTouchRipple-root-129"
+      />
+    </button>
+  </div>
+  <div
+    className="MuiGrid-item-4 MuiGrid-grid-lg-auto-72"
+    onClick={[Function]}
+  >
+    <button
+      className="MuiButtonBase-root-126 MuiButton-root-100 MuiButton-text-102 MuiButton-flat-105 EditorSwitchTab-inactiveButton-2"
+      disabled={false}
+      onBlur={[Function]}
+      onContextMenu={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiButton-label-101"
+      >
+        Event
+      </span>
+      <span
+        className="MuiTouchRipple-root-129"
+      />
+    </button>
+  </div>
+</div>
+`;

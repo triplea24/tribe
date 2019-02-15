@@ -69,5 +69,6 @@ const styles = (theme: Theme) => ({
 
 const withMaterialUI = withStyles(styles);
 
+export const EditorSwitchTabComponent = withMaterialUI(EditorSwitchTab);
 // TODO: Should use compose
 export default withRedux(withMaterialUI(EditorSwitchTab));

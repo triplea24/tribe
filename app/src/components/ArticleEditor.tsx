@@ -183,5 +183,5 @@ const withRedux = connect(
   mapStateToProps,
   { changeBodyContent, changeTitle, addContent }
 );
-
+export const ArticleEditorComponent = withMaterialUI(ArticleEditor);
 export default withRedux(withMaterialUI(ArticleEditor));

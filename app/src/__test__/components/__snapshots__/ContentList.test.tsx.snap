@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Content List match the snapshot 1`] = `
+<ul
+  className="MuiList-root-3 MuiList-padding-4 ContentList-root-1"
+>
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+  Content
+  <hr
+    className="MuiDivider-root-7"
+  />
+</ul>
+`;

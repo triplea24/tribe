@@ -44,3 +44,30 @@ Object {
   "title": "",
 }
 `;
+
+exports[`Reducers Body content it should change body content 1`] = `
+Object {
+  "bodyContent": "Something",
+  "contents": Object {},
+  "editorMode": "article",
+  "title": "",
+}
+`;
+
+exports[`Reducers Title it should change title 1`] = `
+Object {
+  "bodyContent": "",
+  "contents": Object {},
+  "editorMode": "article",
+  "title": "Some cool title",
+}
+`;
+
+exports[`Reducers initial state should match a snapshot 1`] = `
+Object {
+  "bodyContent": "",
+  "contents": Object {},
+  "editorMode": "article",
+  "title": "",
+}
+`;

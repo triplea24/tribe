@@ -57,6 +57,7 @@ const styles = (theme: Theme) => ({
     display: "inline"
   }
 });
+const withMaterialUI = withStyles(styles);
 
 const mapStateToProps = ({ contents }: any) => ({
   contents
@@ -65,6 +66,6 @@ const withRedux = connect(
   mapStateToProps,
   { loadContents }
 );
-const withMaterialUI = withStyles(styles);
 
+export const ContentListComponent = withMaterialUI(ContentList);
 export default withRedux(withMaterialUI(ContentList));

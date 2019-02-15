@@ -39,5 +39,5 @@ const mapStateToProps = ({
   bodyContent
 });
 const withRedux = connect(mapStateToProps);
-
+export const EditorComponent = Editor;
 export default withRedux(Editor);
