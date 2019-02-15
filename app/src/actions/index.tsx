@@ -23,6 +23,7 @@ export const addContent = (content: any) => (dispatch: any) => {
         dispatch({ type: RESET_EDITOR });
       }
     })
+    .catch(err => console.log(err)) // TODO: Can be shown in Snack
     .then(() => dispatch({ type: DISMISS_LOADING }));
 };
 export const changeEditorMode = (mode: string) => (dispatch: any) => {
@@ -47,6 +48,7 @@ export const removeContent = (id: string) => (dispatch: any) => {
         dispatch({ type: REMOVE_CONTENT, payload: id });
       }
     })
+    .catch(err => console.log(err)) // TODO: Can be shown in Snack
     .then(() => dispatch({ type: DISMISS_LOADING }));
 };
 
