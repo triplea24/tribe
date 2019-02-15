@@ -68,13 +68,13 @@ class ArticleEditor extends React.Component<Props, State> {
 
   handleSubmit = () => {
     const { title } = this.props;
-    if (title === "") {
+    if (title === undefined || title === "") {
       return this.setState({
         error: "Title must not be empty!"
       });
     }
     const body = this.state.editorState.getCurrentContent().getPlainText();
-    if (body === "") {
+    if (this.props.body === undefined || this.props.body === "") {
       return this.setState({
         error: "Body of the Article must not be empty!"
       });
@@ -84,6 +84,7 @@ class ArticleEditor extends React.Component<Props, State> {
       title,
       type: "article"
     });
+    // TODO: It's not a decent solution
     this.setState({ editorState: EditorState.createEmpty() });
   };
 
