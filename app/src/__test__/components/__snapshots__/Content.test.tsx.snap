@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Content match the snapshot 1`] = `
+<li
+  className="MuiListItem-root-126 MuiListItem-default-129 MuiListItem-dense-130 MuiListItem-gutters-134 MuiListItem-alignItemsFlexStart-131"
+  disabled={false}
+>
+  <div
+    className="MuiAvatar-root-141 MuiListItemAvatar-alignItemsFlexStart-139"
+  >
+    <img
+      alt="Soheil Alavi"
+      className="MuiAvatar-img-143"
+      src="https://material-ui.com/static/images/avatar/1.jpg"
+    />
+  </div>
+  <div
+    className="MuiListItemText-root-144"
+  >
+    <span
+      className="MuiTypography-root-150 MuiTypography-subheading-157 MuiListItemText-primary-147"
+    />
+    <span
+      className="MuiTypography-root-150 MuiTypography-body1-159 MuiTypography-colorTextPrimary-182 Content-inline-125"
+    >
+      Something good
+    </span>
+  </div>
+  <button
+    className="MuiButtonBase-root-212 MuiButton-root-186 MuiButton-text-188 MuiButton-flat-191"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onContextMenu={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="MuiButton-label-187"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-215"
+        focusable="false"
+        role="presentation"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+        />
+        <path
+          d="M0 0h24v24H0z"
+          fill="none"
+        />
+      </svg>
+    </span>
+    <span
+      className="MuiTouchRipple-root-240"
+    />
+  </button>
+</li>
+`;

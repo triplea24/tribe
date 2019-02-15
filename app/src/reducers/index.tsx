@@ -9,14 +9,22 @@ import {
   REMOVE_CONTENT,
   LOAD_CONTENTS
 } from "../actions";
-const initialState = {
+import { AnyAction } from "redux";
+export const initialState = {
   contents: {},
   editorMode: "article",
   bodyContent: "",
   title: ""
 };
 
-export default (state: any = initialState, action: any) => {
+export interface State {
+  contents: object;
+  editorMode: string;
+  bodyContent: string;
+  title: string;
+}
+
+export default (state: State = initialState, action: AnyAction) => {
   switch (action.type) {
     case ADD_CONTENT:
       return {

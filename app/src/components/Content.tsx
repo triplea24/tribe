@@ -111,5 +111,5 @@ const withRedux = connect(
   { removeContent }
 );
 const withMaterialUI = withStyles(styles);
-
+export const ContentComponent = withMaterialUI(Content);
 export default withRedux(withMaterialUI(Content));
