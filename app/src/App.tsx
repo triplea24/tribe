@@ -3,13 +3,13 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import { withStyles } from "@material-ui/core/styles";
-import { Theme } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
+import { Theme, Grid, Dialog, CircularProgress } from "@material-ui/core";
 
 import reducers from "./reducers";
 import Editor from "./components/Editor";
 import EditorSwitchTab from "./components/EditorSwitchTab";
 import ContentList from "./components/ContentList";
+import Loading from "./components/Loading";
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
@@ -36,6 +36,7 @@ class App extends Component<Props> {
             </Grid>
           </Grid>
         </div>
+        <Loading />
       </Provider>
     );
   }

@@ -7,14 +7,17 @@ import {
   CHANGE_TITLE,
   RESET_EDITOR,
   REMOVE_CONTENT,
-  LOAD_CONTENTS
+  LOAD_CONTENTS,
+  SHOW_LOADING,
+  DISMISS_LOADING
 } from "../actions";
 import { AnyAction } from "redux";
 export const initialState = {
   contents: {},
   editorMode: "article",
   bodyContent: "",
-  title: ""
+  title: "",
+  loading: false
 };
 
 export interface State {
@@ -22,6 +25,7 @@ export interface State {
   editorMode: string;
   bodyContent: string;
   title: string;
+  loading: boolean;
 }
 
 export default (state: State = initialState, action: AnyAction) => {
@@ -43,6 +47,10 @@ export default (state: State = initialState, action: AnyAction) => {
       return { ...state, contents: omit([action.payload], state.contents) };
     case LOAD_CONTENTS:
       return { ...state, contents: merge(state.contents, action.payload) };
+    case SHOW_LOADING:
+      return { ...state, loading: true };
+    case DISMISS_LOADING:
+      return { ...state, loading: false };
   }
   return state;
 };

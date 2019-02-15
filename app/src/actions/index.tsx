@@ -9,8 +9,11 @@ export const CHANGE_TITLE = "CHANGE_TITLE";
 export const RESET_EDITOR = "RESET_EDITOR";
 export const REMOVE_CONTENT = "REMOVE_CONTENT";
 export const LOAD_CONTENTS = "LOAD_CONTENTS";
+export const SHOW_LOADING = "SHOW_LOADING";
+export const DISMISS_LOADING = "DISMISS_LOADING";
 
 export const addContent = (content: any) => (dispatch: any) => {
+  dispatch({ type: SHOW_LOADING });
   axios
     .post(`${SERVER_BASE_URL}/api/v1/posts`, content)
     .then(({ status, data }) => {
@@ -18,7 +21,8 @@ export const addContent = (content: any) => (dispatch: any) => {
         dispatch({ type: ADD_CONTENT, payload: data });
         dispatch({ type: RESET_EDITOR });
       }
-    });
+    })
+    .then(() => dispatch({ type: DISMISS_LOADING }));
 };
 export const changeEditorMode = (mode: string) => (dispatch: any) => {
   dispatch({ type: CHANGE_EDITOR_MODE, payload: mode });
@@ -34,25 +38,33 @@ export const resetEditor = () => (dispatch: any) => {
 };
 
 export const removeContent = (id: string) => (dispatch: any) => {
-  axios.delete(`${SERVER_BASE_URL}/api/v1/posts/${id}`).then(({ status }) => {
-    if (status === 200) {
-      dispatch({ type: REMOVE_CONTENT, payload: id });
-    }
-  });
+  dispatch({ type: SHOW_LOADING });
+  axios
+    .delete(`${SERVER_BASE_URL}/api/v1/posts/${id}`)
+    .then(({ status }) => {
+      if (status === 200) {
+        dispatch({ type: REMOVE_CONTENT, payload: id });
+      }
+    })
+    .then(() => dispatch({ type: DISMISS_LOADING }));
 };
 
 export const loadContents = () => (dispatch: any) => {
-  axios.get(`${SERVER_BASE_URL}/api/v1/posts`).then(({ status, data }) => {
-    if (status === 200) {
-      // const reducer = (acc: any, cur: any) => assoc(cur.id, cur, acc);
-      console.log("data", data);
-      const contents = data.reduce((obj: any, item: any) => {
-        obj[item._id] = item;
-        return obj;
-      }, {});
-      console.log("contents", contents);
-      // const contents = data.reduce(reducer, {});
-      dispatch({ type: LOAD_CONTENTS, payload: contents });
-    }
-  });
+  dispatch({ type: SHOW_LOADING });
+  axios
+    .get(`${SERVER_BASE_URL}/api/v1/posts`)
+    .then(({ status, data }) => {
+      if (status === 200) {
+        // const reducer = (acc: any, cur: any) => assoc(cur.id, cur, acc);
+        console.log("data", data);
+        const contents = data.reduce((obj: any, item: any) => {
+          obj[item._id] = item;
+          return obj;
+        }, {});
+        console.log("contents", contents);
+        // const contents = data.reduce(reducer, {});
+        dispatch({ type: LOAD_CONTENTS, payload: contents });
+      }
+    })
+    .then(() => dispatch({ type: DISMISS_LOADING }));
 };
