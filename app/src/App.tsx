@@ -10,6 +10,7 @@ import Editor from "./components/Editor";
 import EditorSwitchTab from "./components/EditorSwitchTab";
 import ContentList from "./components/ContentList";
 import Loading from "./components/Loading";
+import SnackBar from "./components/SnackBar";
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
@@ -33,6 +34,9 @@ class App extends Component<Props> {
             </Grid>
             <Grid item lg={12}>
               <ContentList />
+            </Grid>
+            <Grid item lg={12}>
+              <SnackBar />
             </Grid>
           </Grid>
         </div>

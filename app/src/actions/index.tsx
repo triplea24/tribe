@@ -11,6 +11,7 @@ export const REMOVE_CONTENT = "REMOVE_CONTENT";
 export const LOAD_CONTENTS = "LOAD_CONTENTS";
 export const SHOW_LOADING = "SHOW_LOADING";
 export const DISMISS_LOADING = "DISMISS_LOADING";
+export const SERVER_ERROR = "SERVER_ERROR";
 
 export const addContent = (content: any) => (dispatch: any) => {
   dispatch({ type: SHOW_LOADING });
@@ -66,5 +67,6 @@ export const loadContents = () => (dispatch: any) => {
         dispatch({ type: LOAD_CONTENTS, payload: contents });
       }
     })
+    .catch(() => dispatch({ type: SERVER_ERROR }))
     .then(() => dispatch({ type: DISMISS_LOADING }));
 };

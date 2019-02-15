@@ -9,7 +9,8 @@ import {
   REMOVE_CONTENT,
   LOAD_CONTENTS,
   SHOW_LOADING,
-  DISMISS_LOADING
+  DISMISS_LOADING,
+  SERVER_ERROR
 } from "../actions";
 import { AnyAction } from "redux";
 export const initialState = {
@@ -17,7 +18,8 @@ export const initialState = {
   editorMode: "article",
   bodyContent: "",
   title: "",
-  loading: false
+  loading: false,
+  serverError: false
 };
 
 export interface State {
@@ -26,6 +28,7 @@ export interface State {
   bodyContent: string;
   title: string;
   loading: boolean;
+  serverError: boolean;
 }
 
 export default (state: State = initialState, action: AnyAction) => {
@@ -51,6 +54,8 @@ export default (state: State = initialState, action: AnyAction) => {
       return { ...state, loading: true };
     case DISMISS_LOADING:
       return { ...state, loading: false };
+    case SERVER_ERROR:
+      return { ...state, serverError: true };
   }
   return state;
 };
