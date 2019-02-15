@@ -29,5 +29,5 @@ class App {
     mongoose.connect(this.mongoUrl);
   }
 }
-
+export { App };
 export default new App().app;
