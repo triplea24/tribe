@@ -55,7 +55,7 @@ class PostEditor extends React.Component<Props, State> {
     return (
       <Paper className={classes.root}>
         <Grid container spacing={8}>
-          <Grid item lg={12}>
+          <Grid item xs={12}>
             <Avatar
               src={"https://material-ui.com/static/images/avatar/1.jpg"}
             />
@@ -69,51 +69,60 @@ class PostEditor extends React.Component<Props, State> {
               onChange={this.handleChange}
             />
           </Grid>
-          <Grid item lg={"auto"}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              className={classes.fileButton}
-            >
-              <PhotoIcon />
-              Photo/Video
-            </Button>
+
+          <Grid item lg={11} xs={"auto"} md={11} sm={11}>
+            <Grid container spacing={8}>
+              <Grid item lg={"auto"}>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  className={classes.fileButton}
+                >
+                  <PhotoIcon />
+                  Photo/Video
+                </Button>
+              </Grid>
+              <Grid item lg={"auto"}>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  className={classes.fileButton}
+                >
+                  <LibraryBookIcon />
+                  Article
+                </Button>
+              </Grid>
+              <Grid item lg={"auto"}>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  className={classes.fileButton}
+                >
+                  <AttachmentIcon />
+                  File
+                </Button>
+              </Grid>
+              <Grid item lg={"auto"}>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  className={classes.fileButton}
+                >
+                  <MoreIcon />
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item lg={"auto"}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              className={classes.fileButton}
-            >
-              <LibraryBookIcon />
-              Article
-            </Button>
+          <Grid item lg={1} xs={"auto"} md={1} sm={1}>
+            <Grid container justify={"flex-end"}>
+              <Grid item lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"}>
+                <Button className={classes.button} onClick={this.handleSubmit}>
+                  Post
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item lg={"auto"}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              className={classes.fileButton}
-            >
-              <AttachmentIcon />
-              File
-            </Button>
-          </Grid>
-          <Grid item lg={"auto"}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              className={classes.fileButton}
-            >
-              <MoreIcon />
-            </Button>
-          </Grid>
-          <Grid item lg={6} />
-          <Grid item lg={1}>
-            <Button className={classes.button} onClick={this.handleSubmit}>
-              Post
-            </Button>
-          </Grid>
+
           <Grid item lg={12}>
             {this.props.error && (
               <Typography className={classes.error}>
@@ -136,10 +145,10 @@ const styles = ({ spacing }: Theme) => ({
   button: {
     background: "#34aa44",
     color: "#ffffff",
-    paddingLeft: 24,
-    paddingRight: 24,
-    paddignTop: 8,
-    paddingBottom: 8,
+    paddingLeft: spacing.unit * 3,
+    paddingRight: spacing.unit * 3,
+    paddignTop: spacing.unit,
+    paddingBottom: spacing.unit,
     size: 14
   },
   avatar: {

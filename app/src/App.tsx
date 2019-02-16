@@ -26,16 +26,16 @@ class App extends Component<Props> {
       <Provider store={store}>
         <div className={classes.root}>
           <Grid container spacing={24}>
-            <Grid item lg={12}>
+            <Grid item xs={12}>
               <EditorSwitchTab />
             </Grid>
-            <Grid item lg={12}>
+            <Grid item xs={12}>
               <Editor />
             </Grid>
-            <Grid item lg={12}>
+            <Grid item xs={12}>
               <ContentList />
             </Grid>
-            <Grid item lg={12}>
+            <Grid item xs={12}>
               <SnackBar />
             </Grid>
           </Grid>
