@@ -15,19 +15,27 @@ import { EditorState, ContentState } from "draft-js";
 import { connect } from "react-redux";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-import { changeBody, changeTitle, addContent } from "../actions";
+import {
+  changeBody,
+  changeTitle,
+  addContent,
+  showEditorError
+} from "../actions";
+import { ReduxState } from "../reducers";
 
 interface Props {
   classes?: any;
   changeBody?: any;
   changeTitle?: any;
   addContent?: any;
+  showEditorError?: any;
   body: string;
   title: string;
+  error: boolean;
+  errorMessage: string;
 }
 interface State {
   editorState: EditorState;
-  error: string;
 }
 
 const chips = [
@@ -40,7 +48,6 @@ class ArticleEditor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      error: "",
       editorState: EditorState.createWithContent(
         ContentState.createFromText(props.body)
       )
@@ -49,7 +56,6 @@ class ArticleEditor extends React.Component<Props, State> {
   onEditorStateChange = (editorState: EditorState) => {
     this.setState(
       {
-        error: "",
         editorState
       },
       () => {
@@ -62,22 +68,19 @@ class ArticleEditor extends React.Component<Props, State> {
   };
 
   handleChangeTitle = ({ target: { value: body } }: any) => {
-    if (this.state.error !== "") this.setState({ error: "" });
     this.props.changeTitle(body);
   };
 
   handleSubmit = () => {
     const { title } = this.props;
     if (title === undefined || title === "") {
-      return this.setState({
-        error: "Title must not be empty!"
-      });
+      return this.props.showEditorError("Title must not be empty!");
     }
     const body = this.state.editorState.getCurrentContent().getPlainText();
     if (this.props.body === undefined || this.props.body === "") {
-      return this.setState({
-        error: "Body of the Article must not be empty!"
-      });
+      return this.props.showEditorError(
+        "Body of the Article must not be empty!"
+      );
     }
     this.props.addContent({
       body,
@@ -85,8 +88,17 @@ class ArticleEditor extends React.Component<Props, State> {
       type: "article"
     });
     // TODO: It's not a decent solution
-    this.setState({ editorState: EditorState.createEmpty() });
+    // this.setState({ editorState: EditorState.createEmpty() });
   };
+
+  static getDerivedStateFromProps(nextProps: Props, state: State) {
+    if (nextProps.body === "" && nextProps.title === "") {
+      return {
+        editorState: EditorState.createEmpty()
+      };
+    }
+    return null;
+  }
 
   render() {
     const { classes } = this.props;
@@ -134,9 +146,9 @@ class ArticleEditor extends React.Component<Props, State> {
             </Button>
           </Grid>
           <Grid item lg={12}>
-            {this.state.error && (
+            {this.props.error && (
               <Typography className={classes.error}>
-                {this.state.error}
+                {this.props.errorMessage}
               </Typography>
             )}
           </Grid>
@@ -174,15 +186,19 @@ const styles = ({ spacing }: Theme) => ({
   }
 });
 
-const mapStateToProps = ({ editor: { body, title } }: any) => ({
+const mapStateToProps = ({
+  editor: { body, title, error, errorMessage }
+}: ReduxState) => ({
   title,
-  body
+  body,
+  error,
+  errorMessage
 });
 
 const withMaterialUI = withStyles(styles);
 const withRedux = connect(
   mapStateToProps,
-  { changeBody, changeTitle, addContent }
+  { changeBody, changeTitle, addContent, showEditorError }
 );
 export const ArticleEditorComponent = withMaterialUI(ArticleEditor);
 export default withRedux(withMaterialUI(ArticleEditor));

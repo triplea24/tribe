@@ -15,7 +15,12 @@ import LibraryBookIcon from "@material-ui/icons/LibraryBooks";
 import MoreIcon from "@material-ui/icons/MoreHoriz";
 import { connect } from "react-redux";
 
-import { changeBody, addContent } from "../actions";
+import {
+  changeBody,
+  addContent,
+  showEditorError,
+  dismissEditorError
+} from "../actions";
 import { ReduxState } from "../reducers";
 
 interface Props {
@@ -23,25 +28,21 @@ interface Props {
   changeBody?: any;
   addContent: any;
   body?: string;
+  error: boolean;
+  errorMessage: string;
+  showEditorError: any;
+  dismissEditorError: any;
 }
 
-interface State {
-  error: string;
-}
+interface State {}
 
 class PostEditor extends React.Component<Props, State> {
-  state = {
-    error: ""
-  };
   handleChange = ({ target: { value: body } }: any) => {
-    if (this.state.error !== "") this.setState({ error: "" });
     this.props.changeBody(body);
   };
   handleSubmit = () => {
     if (this.props.body === undefined || this.props.body === "") {
-      return this.setState({
-        error: `Post must contain some words`
-      });
+      return this.props.showEditorError("Post must contain some words");
     }
     this.props.addContent({
       body: this.props.body,
@@ -114,9 +115,9 @@ class PostEditor extends React.Component<Props, State> {
             </Button>
           </Grid>
           <Grid item lg={12}>
-            {this.state.error && (
+            {this.props.error && (
               <Typography className={classes.error}>
-                {this.state.error}
+                {this.props.errorMessage}
               </Typography>
             )}
           </Grid>
@@ -149,12 +150,14 @@ const styles = ({ spacing }: Theme) => ({
   }
 });
 
-const mapStateToProps = ({ editor: { body } }: ReduxState) => ({ body });
+const mapStateToProps = ({
+  editor: { body, error, errorMessage }
+}: ReduxState) => ({ body, error, errorMessage });
 
 const withMaterialUI = withStyles(styles);
 const withRedux = connect(
   mapStateToProps,
-  { changeBody, addContent }
+  { changeBody, addContent, showEditorError, dismissEditorError }
 );
 
 export const PostEditorComponent = withMaterialUI(PostEditor);

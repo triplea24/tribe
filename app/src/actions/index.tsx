@@ -12,6 +12,8 @@ export const LOAD_CONTENTS = "LOAD_CONTENTS";
 export const SHOW_LOADING = "SHOW_LOADING";
 export const DISMISS_LOADING = "DISMISS_LOADING";
 export const SERVER_ERROR = "SERVER_ERROR";
+export const SHOW_EDITOR_ERROR = "SHOW_EDITOR_ERROR";
+export const DISMISS_EDITOR_ERROR = "DISMISS_EDITOR_ERROR";
 
 export const addContent = (content: any) => (dispatch: any) => {
   dispatch({ type: SHOW_LOADING });
@@ -23,9 +25,26 @@ export const addContent = (content: any) => (dispatch: any) => {
         dispatch({ type: RESET_EDITOR });
       }
     })
-    .catch(err => console.log(err)) // TODO: Can be shown in Snack
+    .catch(err =>
+      dispatch({
+        type: SHOW_EDITOR_ERROR,
+        payload: "An error occured, please try again."
+      })
+    )
     .then(() => dispatch({ type: DISMISS_LOADING }));
 };
+export const showEditorError = (message: string) => (dispatch: any) => {
+  dispatch({
+    type: SHOW_EDITOR_ERROR,
+    payload: message
+  });
+};
+export const dismissEditorError = () => (dispatch: any) => {
+  dispatch({
+    type: DISMISS_EDITOR_ERROR
+  });
+};
+
 export const changeEditorMode = (mode: string) => (dispatch: any) => {
   dispatch({ type: CHANGE_EDITOR_MODE, payload: mode });
 };
