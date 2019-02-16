@@ -15,24 +15,18 @@ const isValid = (content: ContentType) =>
   (content.type === "article" ? content.body && content.title : content.body);
 
 export class Controller {
-  public getCounter: number;
-  public postCounter: number;
-  constructor() {
-    this.getCounter = 0;
-    this.postCounter = 0;
-  }
   public addNewContent = (req: Request, res: Response) => {
     if (!isValid(req.body)) {
       res.statusMessage = "Post/Article is not valid!";
       return res.send(400).end();
     }
-    this.postCounter++;
     let delayTime = 1;
     let delay = false;
-    if (this.postCounter % 9 === 0) {
+    const random: number = Math.random();
+    if (random < 0.1) {
       return res.status(500).send(new Error());
     }
-    if (this.postCounter % 5 === 0) {
+    if (random < 0.2) {
       delayTime = 5000 + Math.floor(Math.random() * Math.floor(5000));
       delay = true;
     }
@@ -47,10 +41,10 @@ export class Controller {
     }, delayTime);
   };
   public getAllContents = (req: Request, res: Response) => {
-    this.getCounter++;
     let delayTime = 1;
     let delay = false;
-    if (this.getCounter % 5 === 0) {
+    const random: number = Math.random();
+    if (random < 0.2) {
       delayTime = 5500;
       delay = true;
     }
