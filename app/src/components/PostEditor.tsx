@@ -15,11 +15,12 @@ import LibraryBookIcon from "@material-ui/icons/LibraryBooks";
 import MoreIcon from "@material-ui/icons/MoreHoriz";
 import { connect } from "react-redux";
 
-import { changeBodyContent, addContent } from "../actions";
+import { changeBody, addContent } from "../actions";
+import { ReduxState } from "../reducers";
 
 interface Props {
   classes?: any;
-  changeBodyContent?: any;
+  changeBody?: any;
   addContent: any;
   body?: string;
 }
@@ -34,10 +35,9 @@ class PostEditor extends React.Component<Props, State> {
   };
   handleChange = ({ target: { value: body } }: any) => {
     if (this.state.error !== "") this.setState({ error: "" });
-    this.props.changeBodyContent(body);
+    this.props.changeBody(body);
   };
   handleSubmit = () => {
-    // TODO: Validation first
     if (this.props.body === undefined || this.props.body === "") {
       return this.setState({
         error: `Post must contain some words`
@@ -149,12 +149,12 @@ const styles = ({ spacing }: Theme) => ({
   }
 });
 
-const mapStateToProps = ({ bodyContent: body }: any) => ({ body });
+const mapStateToProps = ({ editor: { body } }: ReduxState) => ({ body });
 
 const withMaterialUI = withStyles(styles);
 const withRedux = connect(
   mapStateToProps,
-  { changeBodyContent, addContent }
+  { changeBody, addContent }
 );
 
 export const PostEditorComponent = withMaterialUI(PostEditor);

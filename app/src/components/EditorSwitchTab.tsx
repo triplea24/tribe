@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 
 import { changeEditorMode } from "../actions";
+import { ReduxState } from "../reducers";
 
 interface Props {
   classes?: any;
-  editorMode: string;
+  mode: string;
   changeEditorMode: Function;
 }
 
@@ -20,7 +21,7 @@ const tabs = [
 
 class EditorSwitchTab extends React.Component<Props> {
   render() {
-    const { editorMode, classes } = this.props;
+    const { mode, classes } = this.props;
     const Buttons = tabs.map(({ key, text, disabled = false }) => (
       <Grid
         key={key}
@@ -30,7 +31,7 @@ class EditorSwitchTab extends React.Component<Props> {
       >
         <Button
           className={
-            editorMode === key ? classes.activeButton : classes.inactiveButton
+            mode === key ? classes.activeButton : classes.inactiveButton
           }
         >
           {text}
@@ -45,11 +46,8 @@ class EditorSwitchTab extends React.Component<Props> {
   }
 }
 
-interface ReduxState {
-  editorMode: string;
-}
-const mapStateToProps = ({ editorMode = "article" }: ReduxState) => ({
-  editorMode
+const mapStateToProps = ({ editor: { mode } }: ReduxState) => ({
+  mode
 });
 const withRedux = connect(
   mapStateToProps,

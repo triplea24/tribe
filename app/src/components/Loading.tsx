@@ -8,6 +8,8 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
+import { ReduxState } from "../reducers";
+
 interface Props {
   classes?: any;
   loading: boolean;
@@ -34,10 +36,7 @@ const styles = (theme: Theme) => ({
   progress: {}
 });
 
-interface ReduxState {
-  loading: boolean;
-}
-const mapStateToProps = ({ loading }: ReduxState) => ({
+const mapStateToProps = ({ app: { loading } }: ReduxState) => ({
   loading
 });
 const withRedux = connect(

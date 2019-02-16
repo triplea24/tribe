@@ -3,6 +3,8 @@ import PostEditor from "./PostEditor";
 import ArticleEditor from "./ArticleEditor";
 import { connect } from "react-redux";
 
+import { ReduxState } from "../reducers";
+
 export enum EditorType {
   Article = "Article",
   Post = "Post"
@@ -21,23 +23,10 @@ class Editor extends React.Component<Props> {
   }
 }
 
-interface ReduxState {
-  editorMode: string;
-  title?: string;
-  bodyContent: string;
-}
-
-const defaultEditorMode = "article";
-
-const mapStateToProps = ({
-  editorMode = defaultEditorMode,
-  title,
-  bodyContent
-}: ReduxState) => ({
-  type: editorMode === "article" ? EditorType.Article : EditorType.Post,
-  title,
-  bodyContent
+const mapStateToProps = ({ editor: { mode } }: ReduxState) => ({
+  type: mode === "article" ? EditorType.Article : EditorType.Post
 });
+
 const withRedux = connect(mapStateToProps);
 export const EditorComponent = Editor;
 export default withRedux(Editor);

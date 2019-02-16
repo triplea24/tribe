@@ -8,7 +8,7 @@ import { Theme, Grid, Dialog, CircularProgress } from "@material-ui/core";
 import reducers from "./reducers";
 import Editor from "./components/Editor";
 import EditorSwitchTab from "./components/EditorSwitchTab";
-import ContentList from "./components/ContentList";
+import ContentList from "./components/PostList";
 import Loading from "./components/Loading";
 import SnackBar from "./components/SnackBar";
 

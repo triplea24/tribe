@@ -4,29 +4,30 @@ import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import { connect } from "react-redux";
 
-import Content from "./Content";
+import Post from "./Post";
 import { loadContents } from "../actions";
+import { ReduxState } from "../reducers";
 
 interface Props {
   classes?: any;
-  contents: any;
+  data: any;
   loadContents: any;
 }
 
 class ContentList extends React.Component<Props> {
   render() {
-    const { classes, contents } = this.props;
+    const { classes, data } = this.props;
     return (
       <List className={classes.root}>
-        {contents &&
-          Object.keys(contents)
+        {data &&
+          Object.keys(data)
             .reverse()
             .map(key => {
-              const object = contents[key];
+              const object = data[key];
               const { _id, type, body, title } = object;
               return (
                 <React.Fragment key={_id}>
-                  <Content
+                  <Post
                     id={_id}
                     type={type}
                     title={title}
@@ -59,8 +60,8 @@ const styles = (theme: Theme) => ({
 });
 const withMaterialUI = withStyles(styles);
 
-const mapStateToProps = ({ contents }: any) => ({
-  contents
+const mapStateToProps = ({ posts: { data } }: ReduxState) => ({
+  data
 });
 const withRedux = connect(
   mapStateToProps,

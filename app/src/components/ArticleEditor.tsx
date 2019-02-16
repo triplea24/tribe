@@ -15,11 +15,11 @@ import { EditorState, ContentState } from "draft-js";
 import { connect } from "react-redux";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-import { changeBodyContent, changeTitle, addContent } from "../actions";
+import { changeBody, changeTitle, addContent } from "../actions";
 
 interface Props {
   classes?: any;
-  changeBodyContent?: any;
+  changeBody?: any;
   changeTitle?: any;
   addContent?: any;
   body: string;
@@ -53,7 +53,7 @@ class ArticleEditor extends React.Component<Props, State> {
         editorState
       },
       () => {
-        this.props.changeBodyContent(
+        this.props.changeBody(
           // TODO: Not plaintext here!
           editorState.getCurrentContent().getPlainText()
         );
@@ -174,7 +174,7 @@ const styles = ({ spacing }: Theme) => ({
   }
 });
 
-const mapStateToProps = ({ bodyContent: body = "", title }: any) => ({
+const mapStateToProps = ({ editor: { body, title } }: any) => ({
   title,
   body
 });
@@ -182,7 +182,7 @@ const mapStateToProps = ({ bodyContent: body = "", title }: any) => ({
 const withMaterialUI = withStyles(styles);
 const withRedux = connect(
   mapStateToProps,
-  { changeBodyContent, changeTitle, addContent }
+  { changeBody, changeTitle, addContent }
 );
 export const ArticleEditorComponent = withMaterialUI(ArticleEditor);
 export default withRedux(withMaterialUI(ArticleEditor));

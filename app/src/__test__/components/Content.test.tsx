@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { ContentComponent } from "../../components/Content";
+import { ContentComponent } from "../../components/Post";
 
 const mockContent = {
   _id: "5c65c766ab959d35564bf3f7",

@@ -2,8 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { times, assoc } from "ramda";
 
-import { ContentListComponent } from "../../components/ContentList";
-jest.mock("../../components/Content", () => () => "Content");
+import { ContentListComponent } from "../../components/PostList";
+jest.mock("../../components/Post", () => () => "Post");
 
 const mockContent = {
   _id: "5c65c766ab959d35564bf3f7",
@@ -15,13 +15,11 @@ const mockContent = {
 
 describe("Content List", () => {
   it("match the snapshot", () => {
-    const contents = times((n: number) => {
+    const data = times((n: number) => {
       return { ...mockContent, _id: mockContent._id + n };
     }, 10).reduce((obj: any, item: any) => assoc(item._id, item, obj), {});
     const tree = renderer
-      .create(
-        <ContentListComponent contents={contents} loadContents={() => {}} />
-      )
+      .create(<ContentListComponent data={data} loadContents={() => {}} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

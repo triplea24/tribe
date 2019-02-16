@@ -29,7 +29,7 @@ export const addContent = (content: any) => (dispatch: any) => {
 export const changeEditorMode = (mode: string) => (dispatch: any) => {
   dispatch({ type: CHANGE_EDITOR_MODE, payload: mode });
 };
-export const changeBodyContent = (mode: string) => (dispatch: any) => {
+export const changeBody = (mode: string) => (dispatch: any) => {
   dispatch({ type: CHANGE_BODY_CONTENT, payload: mode });
 };
 export const changeTitle = (title: string) => (dispatch: any) => {
