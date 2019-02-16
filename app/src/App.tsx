@@ -48,9 +48,9 @@ class App extends Component<Props> {
 
 const styles = ({ spacing }: Theme) => ({
   root: {
-    paddingTop: spacing.unit * 20,
-    paddingLeft: 123,
-    paddingRight: 163,
+    paddingTop: spacing.unit * 5,
+    paddingLeft: spacing.unit * 3,
+    paddingRight: spacing.unit * 3,
     alignItems: "center",
     justifyContent: "center"
   }
