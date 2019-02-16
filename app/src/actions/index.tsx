@@ -11,7 +11,10 @@ export const REMOVE_CONTENT = "REMOVE_CONTENT";
 export const LOAD_CONTENTS = "LOAD_CONTENTS";
 export const SHOW_LOADING = "SHOW_LOADING";
 export const DISMISS_LOADING = "DISMISS_LOADING";
-export const SERVER_ERROR = "SERVER_ERROR";
+export const SHOW_SERVER_ERROR = "SHOW_SERVER_ERROR";
+export const DISMISS_SERVER_ERROR = "DISMISS_SERVER_ERROR";
+export const SHOW_SNACK_ERROR = "SHOW_SNACK_ERROR";
+export const DISMISS_SNACK_ERROR = "DISMISS_SNACK_ERROR";
 export const SHOW_EDITOR_ERROR = "SHOW_EDITOR_ERROR";
 export const DISMISS_EDITOR_ERROR = "DISMISS_EDITOR_ERROR";
 
@@ -58,6 +61,19 @@ export const resetEditor = () => (dispatch: any) => {
   dispatch({ type: RESET_EDITOR });
 };
 
+export const showSnackError = (message: string) => (dispatch: any) => {
+  dispatch({
+    type: SHOW_SNACK_ERROR,
+    payload: message
+  });
+};
+
+export const dismissSnackError = () => (dispatch: any) => {
+  dispatch({
+    type: DISMISS_SNACK_ERROR
+  });
+};
+
 export const removeContent = (id: string) => (dispatch: any) => {
   dispatch({ type: SHOW_LOADING });
   axios
@@ -67,7 +83,12 @@ export const removeContent = (id: string) => (dispatch: any) => {
         dispatch({ type: REMOVE_CONTENT, payload: id });
       }
     })
-    .catch(err => console.log(err)) // TODO: Can be shown in Snack
+    .catch(err =>
+      dispatch({
+        type: SHOW_SNACK_ERROR,
+        payload: "An error occured, please try again!"
+      })
+    )
     .then(() => dispatch({ type: DISMISS_LOADING }));
 };
 
@@ -84,6 +105,6 @@ export const loadContents = () => (dispatch: any) => {
         dispatch({ type: LOAD_CONTENTS, payload: posts });
       }
     })
-    .catch(() => dispatch({ type: SERVER_ERROR }))
+    .catch(() => dispatch({ type: SHOW_SERVER_ERROR }))
     .then(() => dispatch({ type: DISMISS_LOADING }));
 };

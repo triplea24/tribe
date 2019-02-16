@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import { withStyles } from "@material-ui/core/styles";
-import { Theme, Grid } from "@material-ui/core";
+import { Theme, Grid, createStyles } from "@material-ui/core";
 import { createLogger } from "redux-logger";
 
 import reducers from "./reducers";
@@ -35,10 +35,11 @@ class App extends Component<Props> {
             <Grid item xs={12}>
               <ContentList />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <SnackBar />
-            </Grid>
+            </Grid> */}
           </Grid>
+          <SnackBar />
         </div>
         <Loading />
       </Provider>
@@ -46,15 +47,16 @@ class App extends Component<Props> {
   }
 }
 
-const styles = ({ spacing }: Theme) => ({
-  root: {
-    paddingTop: spacing.unit * 5,
-    paddingLeft: spacing.unit * 3,
-    paddingRight: spacing.unit * 3,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+const styles = ({ spacing }: Theme) =>
+  createStyles({
+    root: {
+      paddingTop: spacing.unit * 5,
+      paddingLeft: spacing.unit * 3,
+      paddingRight: spacing.unit * 3,
+      alignItems: "center",
+      justifyContent: "center"
+    }
+  });
 
 const withMaterialUI = withStyles(styles);
 
