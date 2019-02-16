@@ -77,15 +77,11 @@ export const loadContents = () => (dispatch: any) => {
     .get(`${SERVER_BASE_URL}/api/v1/posts`)
     .then(({ status, data }) => {
       if (status === 200) {
-        // const reducer = (acc: any, cur: any) => assoc(cur.id, cur, acc);
-        console.log("data", data);
-        const contents = data.reduce((obj: any, item: any) => {
-          obj[item._id] = item;
-          return obj;
-        }, {});
-        console.log("contents", contents);
-        // const contents = data.reduce(reducer, {});
-        dispatch({ type: LOAD_CONTENTS, payload: contents });
+        const posts = data.reduce(
+          (obj: any, item: any) => assoc(item._id, item, obj),
+          {}
+        );
+        dispatch({ type: LOAD_CONTENTS, payload: posts });
       }
     })
     .catch(() => dispatch({ type: SERVER_ERROR }))

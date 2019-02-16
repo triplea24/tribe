@@ -3,7 +3,8 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import { withStyles } from "@material-ui/core/styles";
-import { Theme, Grid, Dialog, CircularProgress } from "@material-ui/core";
+import { Theme, Grid } from "@material-ui/core";
+import { createLogger } from "redux-logger";
 
 import reducers from "./reducers";
 import Editor from "./components/Editor";
@@ -12,9 +13,8 @@ import ContentList from "./components/PostList";
 import Loading from "./components/Loading";
 import SnackBar from "./components/SnackBar";
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
-store.subscribe(() => console.log("Change in redux store", store.getState()));
+const logger = createLogger({});
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, logger));
 
 interface Props {
   classes?: any;
