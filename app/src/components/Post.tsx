@@ -6,7 +6,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
+  Collapse
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -42,12 +43,17 @@ interface Props {
 
 interface State {
   isConfirmationDialogOpen: boolean;
+  visible: boolean;
 }
 
 class Content extends React.Component<Props, State> {
-  state = {
-    isConfirmationDialogOpen: false
-  };
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isConfirmationDialogOpen: false,
+      visible: false
+    };
+  }
   handleDelete = () => {
     this.props.removeContent(this.props.id);
     this.dismissDialog();
@@ -58,50 +64,58 @@ class Content extends React.Component<Props, State> {
   dismissDialog = () => {
     this.setState({ isConfirmationDialogOpen: false });
   };
+  componentDidMount() {
+    this.setState({ visible: true });
+  }
+  componentWillUnmount() {
+    this.setState({ visible: false });
+  }
   render() {
     const { classes } = this.props;
     return (
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt={this.props.avatarAlt} src={this.props.avatar} />
-        </ListItemAvatar>
-        <ListItemText
-          primary={this.props.type === "article" && this.props.title}
-          secondary={
-            <Typography
-              component="span"
-              className={classes.inline}
-              color="textPrimary"
-            >
-              {this.props.body}
-            </Typography>
-          }
-        />
-        <Button onClick={this.showDialog}>
-          <DeleteIcon />
-        </Button>
-        <Dialog
-          open={this.state.isConfirmationDialogOpen}
-          onClose={this.dismissDialog}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{"Delete"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              {`Are you sure you want to delete this ${this.props.type}?`}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.dismissDialog} color="primary">
-              No
-            </Button>
-            <Button onClick={this.handleDelete} color={"secondary"} autoFocus>
-              Yes
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </ListItem>
+      <Collapse in={this.state.visible} timeout={200}>
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt={this.props.avatarAlt} src={this.props.avatar} />
+          </ListItemAvatar>
+          <ListItemText
+            primary={this.props.type === "article" && this.props.title}
+            secondary={
+              <Typography
+                component="span"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                {this.props.body}
+              </Typography>
+            }
+          />
+          <Button onClick={this.showDialog}>
+            <DeleteIcon />
+          </Button>
+          <Dialog
+            open={this.state.isConfirmationDialogOpen}
+            onClose={this.dismissDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Delete"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {`Are you sure you want to delete this ${this.props.type}?`}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.dismissDialog} color="primary">
+                No
+              </Button>
+              <Button onClick={this.handleDelete} color={"secondary"} autoFocus>
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </ListItem>
+      </Collapse>
     );
   }
 }
