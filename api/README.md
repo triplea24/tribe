@@ -1,6 +1,6 @@
 # API
 
-The backend is writtent with following technologies:
+The backend side is written with following technologies:
 
 1. Node
 2. TypeScript
@@ -33,15 +33,31 @@ You can do it thus:
 
 ### POST /api/v1/posts
 
-To generate delays or 500 code I used a counter which is initialy 0. It increases after each request.
+To generate delays or 500 code I use `Math.random()` to generate a random number between `0` and `1`. The random number happened to be less than `0.1` in `10%` of the times.
 
-To send `500` error on 10% of the time I just check wheter the counter is dividable by 9 which occures roughly 1/9 = 11% of the times.
+For the rest of the times, which is `90%`, I need to delay as it happen to be `20%` of the times in overall. So I just need to delay in `18%` of the times for the remaining. So I generate a new `Math.random()` and see if it is less than `0.18`. 
 
-To delay more than 5 seconds 20% of the time I just check wheter the counter is dividable by 5 which occures exactly 20% of the times excluding the first 4 requests.
+The whole process is thus:
+
+	if ( Math.random() < 0.1) {
+		// 10% of the overall times
+    	// Send 500 staus code
+    }
+    
+    // The 90% of the overal times
+    if ( Math.random() < 0.18) {
+		// 18% of the rest == 20% of overall
+    	// Delay more than 5 sec
+    }
+    
 
 ### GET /api/v1/posts
 
 To delay in the request I used the same strategy above to generate delay in 20% of the times.
+
+### RabbitMQ
+
+To handle the requests better, my suggestion is to use RabitMQ to process the requests.
 
 ### Test coverage
 
