@@ -8,7 +8,7 @@ describe("EditorSwitchTab", () => {
     const tree = renderer
       .create(
         <EditorSwitchTabComponent
-          editorMode={"article"}
+          mode={"article"}
           changeEditorMode={() => {}}
         />
       )

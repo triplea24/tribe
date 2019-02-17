@@ -11,6 +11,8 @@ describe("ArticleEditor", () => {
       <ArticleEditorComponent
         title={"Something"}
         body={"Something"}
+        error={false}
+        errorMessage={""}
         addContent={() => {}}
       />,
       div

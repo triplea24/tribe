@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { times, assoc } from "ramda";
 
-import { ContentListComponent } from "../../components/PostList";
+import { PostListComponent } from "../../components/PostList";
 jest.mock("../../components/Post", () => () => "Post");
 
 const mockContent = {
@@ -19,7 +19,7 @@ describe("Content List", () => {
       return { ...mockContent, _id: mockContent._id + n };
     }, 10).reduce((obj: any, item: any) => assoc(item._id, item, obj), {});
     const tree = renderer
-      .create(<ContentListComponent data={data} loadContents={() => {}} />)
+      .create(<PostListComponent data={data} loadContents={() => {}} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

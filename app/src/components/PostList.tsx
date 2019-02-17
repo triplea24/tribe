@@ -68,5 +68,5 @@ const withRedux = connect(
   { loadContents }
 );
 
-export const ContentListComponent = withMaterialUI(ContentList);
+export const PostListComponent = withMaterialUI(ContentList);
 export default withRedux(withMaterialUI(ContentList));

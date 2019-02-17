@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { ContentComponent } from "../../components/Post";
+import { PostComponent } from "../../components/Post";
 
 const mockContent = {
   _id: "5c65c766ab959d35564bf3f7",
@@ -15,7 +15,7 @@ describe("Content", () => {
   it("should be rendered without crash", () => {
     const tree = renderer
       .create(
-        <ContentComponent
+        <PostComponent
           removeContent={() => {}}
           id={mockContent._id}
           type={mockContent.type}
