@@ -22,11 +22,10 @@ export class Controller {
     }
     let delayTime = 1;
     let delay = false;
-    const random: number = Math.random();
-    if (random < 0.1) {
+    if (Math.random() < 0.1) {
       return res.status(500).send(new Error());
     }
-    if (random < 0.2) {
+    if (Math.random() < 0.18) {
       delayTime = 5000 + Math.floor(Math.random() * Math.floor(5000));
       delay = true;
     }
